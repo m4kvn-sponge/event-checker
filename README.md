@@ -9,8 +9,8 @@
 | CollideEntityEvent | エンティティが衝突した |
 | MoveEntityEvent | エンティティが動いた |
 | SendCommandEvent | コンソールやプレイヤーからコマンドが送られた |
-| Pre | ワールドのチャンクセーブの前処理が開始した (個別に発生) |
-| Post | ワールドのチャンクセーブの処理が開始した (個別に発生) |
+| SaveWorldEvent.Pre | ワールドのチャンクセーブの前処理が開始した (個別に発生) |
+| SaveWorldEvent.Post | ワールドのチャンクセーブの処理が開始した (個別に発生) |
 | UnloadWorldEvent | ワールドのアンロードが開始した (個別に発生) |
 | GameStoppingEvent | Spongeサーバーの停止処理が開始した |
 | GameStoppedEvent | Spongeサーバーが停止した |
@@ -26,8 +26,8 @@
 
 // <- `stop command`
 - FMLServerStoppingEvent
-- Pre
-- Post
+- SaveWorldEvent.Pre
+- SaveWorldEvent.Post
 - UnloadWorldEvent
 - FMLServerStoppedEvent
 - GameStoppingEvent
