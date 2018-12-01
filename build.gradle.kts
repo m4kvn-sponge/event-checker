@@ -19,6 +19,8 @@ val embed by configurations.creating {
 
 dependencies {
     embed(kotlin("stdlib-jdk8"))
+    implementation(kotlin("stdlib-jdk8"))
+    implementation(kotlin("reflect"))
     implementation("org.spongepowered:spongeapi:7.0.0")
 }
 
