@@ -5,6 +5,7 @@ import org.spongepowered.api.event.Event
 import org.spongepowered.api.event.Listener
 import org.spongepowered.api.event.entity.CollideEntityEvent
 import org.spongepowered.api.event.entity.MoveEntityEvent
+import org.spongepowered.api.event.world.chunk.LoadChunkEvent
 import org.spongepowered.api.plugin.Plugin
 import org.spongepowered.api.text.Text
 import org.spongepowered.api.text.format.TextColors
@@ -19,8 +20,10 @@ class Main {
     @Listener
     fun onEvent(event: Event) {
         when (event) {
+            is LoadChunkEvent,
             is CollideEntityEvent,
-            is MoveEntityEvent -> return
+            is MoveEntityEvent
+            -> return
         }
         val className = event::class.simpleName ?: return
         val text = Text.builder("[EventChecker] ")

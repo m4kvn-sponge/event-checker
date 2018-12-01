@@ -6,10 +6,29 @@
 
 ```
 SendCommandEvent
+
 CollideEvent
 └ CollideEntityEvent 
+
 AffectEntityEvent
 └ CollideEntityEvent
+
+TargetEntityEvent
+├ MoveEntityEvent
+└ TargetLivingEvent
+  └ TargetAgentEvent
+    └ AITaskEvent
+      ├ Add
+      └ Remove
+
+TargetChunkEvent
+└ LoadChunkEvent
+
+TargetWorldEvent
+├ SaveWorldEvent.Pre
+├ SaveWorldEvent.Post
+├ LoadWorldEvent
+└ UnloadWorldEvent
 ```
 
 #### Event
@@ -17,6 +36,12 @@ AffectEntityEvent
 | Name | Description |
 | :--- | :---------- |
 | SendCommandEvent | コンソールやプレイヤーからコマンドが送られた |
+
+### TargetChunkEvent
+
+| Name | Description |
+| :--- | :---------- |
+| LoadChunkEvent | チャンクが読み込まれた |
 
 #### AffectEntityEvent
 
@@ -35,6 +60,8 @@ AffectEntityEvent
 | Name | Description |
 | :--- | :---------- |
 | MoveEntityEvent | エンティティが動いた |
+| AITaskEvent.Add | エージェントの目的にAIタスクが追加された |
+| AITaskEvent.Remove | エージェントの目的からAIタスクが除去された |
 
 #### TargetWorldEvent
 
@@ -42,7 +69,8 @@ AffectEntityEvent
 | :--- | :---------- |
 | SaveWorldEvent.Pre | ワールドのチャンクセーブの前処理が開始した (個別に発生) |
 | SaveWorldEvent.Post | ワールドのチャンクセーブの処理が開始した (個別に発生) |
-| UnloadWorldEvent | ワールドのアンロードが開始した (個別に発生) |
+| LoadWorldEvent | ワールドが読み込まれた (個別に発生) |
+| UnloadWorldEvent | ワールドがアンロードされた (個別に発生) |
 
 #### GameStateEvent
 
