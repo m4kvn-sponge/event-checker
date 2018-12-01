@@ -11,15 +11,27 @@ CollideEvent
 └ CollideEntityEvent 
 
 AffectEntityEvent
+├ SpawnEntityEvent
+│ ├ ChunkLoad
+│ ├ Spawner
+│ └ Custom
 └ CollideEntityEvent
 
 TargetEntityEvent
+├ InteractEntityEvent
+│ └ BreedEntityEvent
+│   ├ FindMeta
+│   └ Breed
 ├ MoveEntityEvent
 └ TargetLivingEvent
   └ TargetAgentEvent
     └ AITaskEvent
       ├ Add
       └ Remove
+
+InteractEvent
+└ InteractEntityEvent
+  └ BreedEntityEvent
 
 TargetChunkEvent
 └ LoadChunkEvent
@@ -47,21 +59,22 @@ TargetWorldEvent
 
 | Name | Description |
 | :--- | :---------- |
-| CollideEntityEvent | エンティティが衝突した |
+| SpawnEntityEvent.ChunkLoad | エンティティがチャンクロードによってスポーンしたときに発生する。 |
+| CollideEntityEvent | エンティティが衝突したしたときに発生する。 |
 
 #### CollideEvent
 
 | Name | Description |
 | :--- | :---------- |
-| CollideEntityEvent | エンティティが衝突した |
+| CollideEntityEvent | AffectEntityEvent -> CollideEntityEvent を参照 |
 
 #### TargetEntityEvent
 
 | Name | Description |
 | :--- | :---------- |
 | MoveEntityEvent | エンティティが動いた |
-| AITaskEvent.Add | エージェントの目的にAIタスクが追加された |
-| AITaskEvent.Remove | エージェントの目的からAIタスクが除去された |
+| AITaskEvent.Add | エージェントの目的にAIタスクが追加されたときに発生する。`SpawnEntityEvent.ChunkLoad` の直前に呼ばれているので、エンティティをスポーンさせる前にエンティティのAIを設定しているっぽい。 |
+| AITaskEvent.Remove | エージェントの目的からAIタスクが除去されたときに発生する。 |
 
 #### TargetWorldEvent
 
