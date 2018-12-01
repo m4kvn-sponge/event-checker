@@ -32,3 +32,7 @@
 - FMLServerStoppedEvent
 - GameStoppingEvent
 - GameStoppedEvent
+
+## Plugin Lifecycle
+
+Spongeのプラグインローダーは、プラグインを使用可能な状態にする前に、すべてのプラグインに対して依存関係が存在するかどうか確認を行い、依存関係の順序にそってソートを行う。その後、ソートされた順番にライフサイクルイベントが発生する。
