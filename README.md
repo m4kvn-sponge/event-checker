@@ -6,8 +6,8 @@
 
 | Name | Description |
 | :--- | :---------- |
-| CollideEntityEvent |  |
-| MoveEntityEvent |  |
+| CollideEntityEvent | エンティティが衝突した |
+| MoveEntityEvent | エンティティが動いた |
 | SendCommandEvent | コンソールやプレイヤーからコマンドが送られた |
 | Pre | ワールドのチャンクセーブの前処理が開始した (個別に発生) |
 | Post | ワールドのチャンクセーブの処理が開始した (個別に発生) |
