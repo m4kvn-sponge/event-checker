@@ -26,6 +26,7 @@ class Main {
     @Listener
     fun onEvent(event: Event) {
         when (event) {
+            is ConstructEntityEvent,
             is ChangeStatisticEvent.TargetPlayer,
             is TickBlockEvent.Random,
             is DropItemEvent.Destruct,
