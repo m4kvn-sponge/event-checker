@@ -5,19 +5,52 @@
 ### sponge
 
 ```
+ClinetPingServerEvent
+
 SendCommandEvent
+
+ChangeStatisticEvent
+└ TargetPlayer
+
+TargetBlockEvent
+└ TickBlockEvent
+  ├ Scheduled
+  └ Random
+
+DropItemEvent
+├ Pre
+├ Destruct
+├ Dispense
+└ Custom
+
+MessageEvent
+└ MessageChannelEvent
+  └ DestructEntityEvent
+    └ Death
 
 CollideEvent
 └ CollideEntityEvent 
 
 AffectEntityEvent
 ├ SpawnEntityEvent
+│ ├ DropItemEvent.Destruct
+│ ├ DropItemEvent.Dispense
 │ ├ ChunkLoad
 │ ├ Spawner
 │ └ Custom
+│   └ DropItemEvent.Custom
 └ CollideEntityEvent
 
 TargetEntityEvent
+├ TargetLivingEvent
+│ ├ TargetHumanoidEvent
+│ │ └ TargetPlayerEvent
+│ │   └ ChangeStatisticEvent.TargetPlayer
+│ └ Death
+├ DestructEntityEvent
+│ └ Death
+├ DamageEntityEvent
+├ IgniteEntityEvent
 ├ InteractEntityEvent
 │ └ BreedEntityEvent
 │   ├ FindMeta
@@ -34,9 +67,11 @@ InteractEvent
   └ BreedEntityEvent
 
 TargetChunkEvent
+├ UnloadChunkEvent
 └ LoadChunkEvent
 
 TargetWorldEvent
+├ ChangeWorldWeatherEvent
 ├ SaveWorldEvent.Pre
 ├ SaveWorldEvent.Post
 ├ LoadWorldEvent
@@ -47,13 +82,31 @@ TargetWorldEvent
 
 | Name | Description |
 | :--- | :---------- |
+| ClientPingServerEvent | クライアントのサーバーリストに表示されたときに発生する |
 | SendCommandEvent | コンソールやプレイヤーからコマンドが送られた |
 
-### TargetChunkEvent
+#### TargetBlockEvent
 
 | Name | Description |
 | :--- | :---------- |
-| LoadChunkEvent | チャンクが読み込まれた |
+| TickBlockEvent.Scheduled |  |
+| TickBlockEvent.Random | ブロックが更新されるときに発生する |
+
+#### DropItemEvent
+
+| Name | Description |
+| :--- | :---------- |
+| DropItem.Pre | アイテムがドロップしそうなときに発生する |
+| DropItem.Destruct | エンティティの体力がなくなりアイテムがドロップするときに発生する |
+| DropItem.Dispense | ディスペンサーからアイテムがドロップするときに発生する |
+| DropItem.Custom | 独自の方法でアイテムがドロップするときに発生する |
+
+#### TargetChunkEvent
+
+| Name | Description |
+| :--- | :---------- |
+| UnloadChunkEvent | チャンクがアンロードされたときに発生する |
+| LoadChunkEvent | チャンクが読み込まれたときに発生する |
 
 #### AffectEntityEvent
 
@@ -62,24 +115,22 @@ TargetWorldEvent
 | SpawnEntityEvent.ChunkLoad | エンティティがチャンクロードによってスポーンしたときに発生する。 |
 | CollideEntityEvent | エンティティが衝突したしたときに発生する。 |
 
-#### CollideEvent
-
-| Name | Description |
-| :--- | :---------- |
-| CollideEntityEvent | AffectEntityEvent -> CollideEntityEvent を参照 |
-
 #### TargetEntityEvent
 
 | Name | Description |
 | :--- | :---------- |
-| MoveEntityEvent | エンティティが動いた |
-| AITaskEvent.Add | エージェントの目的にAIタスクが追加されたときに発生する。`SpawnEntityEvent.ChunkLoad` の直前に呼ばれているので、エンティティをスポーンさせる前にエンティティのAIを設定しているっぽい。 |
-| AITaskEvent.Remove | エージェントの目的からAIタスクが除去されたときに発生する。 |
+| DestructEntityEvent.Death | エンティティが体力がなくなったときに発生する |
+| DamageEntityEvent | エンティティがダメージを受けるときに発生する |
+| IgniteEntityEvent | エンティティに火がつくときに発生する |
+| MoveEntityEvent | エンティティが動くときに発生する |
+| AITaskEvent.Add | エージェントの目的にAIタスクが追加されるときに発生する |
+| AITaskEvent.Remove | エージェントの目的からAIタスクが除去されるときに発生する |
 
 #### TargetWorldEvent
 
 | Name | Description |
 | :--- | :---------- |
+| ChangeWorldWeatherEvent | ワールドの天候が変化するときに発生する (個別に発生) |
 | SaveWorldEvent.Pre | ワールドのチャンクセーブの前処理が開始した (個別に発生) |
 | SaveWorldEvent.Post | ワールドのチャンクセーブの処理が開始した (個別に発生) |
 | LoadWorldEvent | ワールドが読み込まれた (個別に発生) |
